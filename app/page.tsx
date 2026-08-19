@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import SiteNav from '@/components/SiteNav';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -84,16 +85,7 @@ export default function Home() {
         <rect width="100%" height="100%" filter="url(#paperNoise)" />
       </svg>
 
-<nav className="site-nav">
-  <div className="brandmark">Vic Falls <span>Connect</span></div>
-  <div className="nav-list">
-    <a href="/kitchens">Kitchens</a>
-    <a href="/tables">Tables</a>
-    <a href="/market">Market</a>
-    <a href="/village">Village</a>
-  </div>
-  <a href="#" className="nav-book">Host with us</a>
-</nav>
+<SiteNav links={[{ label: 'Kitchens', href: '/kitchens' }, { label: 'Tables', href: '/tables' }, { label: 'Market', href: '/market' }, { label: 'Village', href: '/village' }]} ctaLabel="Host with us" ctaHref="/host" />
 
 <header className="hero wrap">
   <div className="hero-top">
@@ -105,9 +97,9 @@ export default function Home() {
       <div className="hero-sub">Mosi-oa-Tunya · the smoke that thunders · Zimbabwe</div>
     </div>
     <div className="stamp">
-      EST. LOCAL
+      VICTORIA FALLS
       <br />
-      <b>ROUTES</b>
+      <b>MOSI-OA-TUNYA</b>
       <span>17.9243&deg;S</span>
       <br />
       <span>25.8572&deg;E</span>

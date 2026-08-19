@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import SiteNav from '@/components/SiteNav';
 
 type Kitchen = {
   name: string;
@@ -20,7 +21,7 @@ const kitchens: Kitchen[] = [
     name: 'Mama Moyo\'s Kitchen',
     area: 'Chinotimba',
     cuisine: ['Sadza', 'Zimbabwean'],
-    price: '$$',
+    price: '$0 - $100',
     priceValue: 2,
     description: 'Learn to make sadza from maize meal, then sit down to chicken stew and leafy greens with the Moyo family.',
     hours: 'Lesson · Tue–Sun',
@@ -30,7 +31,7 @@ const kitchens: Kitchen[] = [
     name: 'Zambezi Bream Lesson',
     area: 'Town Centre',
     cuisine: ['Fish', 'Zimbabwean'],
-    price: '$$$',
+    price: '$300+',
     priceValue: 3,
     description: 'Follow a host family to the market, prepare fresh bream, and learn the spice blend they use at home.',
     hours: 'Lesson · Wed–Sun',
@@ -40,7 +41,7 @@ const kitchens: Kitchen[] = [
     name: 'Tadiwa\'s Fire Kitchen',
     area: 'Mkhosana',
     cuisine: ['Braai', 'Southern African'],
-    price: '$$',
+    price: '$100 - $300',
     priceValue: 2,
     description: 'A family-led cooking session around the fire: braai techniques, sadza cakes, and the stories behind the meal.',
     hours: 'Lesson · Thu–Mon',
@@ -50,7 +51,7 @@ const kitchens: Kitchen[] = [
     name: 'The Relish Room',
     area: 'Chinotimba',
     cuisine: ['Vegetarian', 'Zimbabwean'],
-    price: '$$',
+    price: '$100 - $300',
     priceValue: 2,
     description: 'Spend an afternoon with a host family making pumpkin, groundnut stew, seasonal greens, and a treasured relish recipe.',
     hours: 'Lesson · Mon–Sat',
@@ -60,7 +61,7 @@ const kitchens: Kitchen[] = [
     name: 'Mbira & Maize Family',
     area: 'Mkhosana',
     cuisine: ['Sadza', 'Vegetarian'],
-    price: '$$',
+    price: '$100 - $300',
     priceValue: 2,
     description: 'Grind maize, shape your own sadza, and cook plant-based Zimbabwean plates before sharing them with your hosts.',
     hours: 'Lesson · Fri–Sun',
@@ -70,7 +71,7 @@ const kitchens: Kitchen[] = [
     name: 'Dust & Honey Morning',
     area: 'Town Centre',
     cuisine: ['Breakfast', 'Southern African'],
-    price: '$',
+    price: '$0 - $100',
     priceValue: 1,
     description: 'Join a family kitchen for breakfast and learn how local honey, maputi, eggs, and seasonal fruit come together.',
     hours: 'Lesson · Daily',
@@ -108,15 +109,7 @@ export default function KitchensPage() {
 
   return (
     <main className="kitchens-page">
-      <nav className="site-nav kitchens-nav">
-        <Link href="/" className="brandmark">Vic Falls <span>Connect</span></Link>
-        <div className="nav-list">
-          <Link href="/">Home</Link>
-          <a href="#listings">Kitchens</a>
-          <a href="#how-it-works">How it works</a>
-        </div>
-        <Link href="/#village" className="nav-book">Host with us</Link>
-      </nav>
+      <SiteNav links={[{ label: 'Home', href: '/' }, { label: 'Kitchens', href: '#listings' }, { label: 'Tables', href: '/tables' }, { label: 'Market', href: '/market' }, { label: 'Village', href: '/village' }]} ctaLabel="Host with us" ctaHref="/host" />
 
       <header className="kitchens-hero wrap">
         <div className="kitchens-hero-copy">
@@ -160,9 +153,9 @@ export default function KitchensPage() {
             <span className="mono">Price</span>
             <select value={price} onChange={(event) => setPrice(event.target.value)}>
               <option>Any price</option>
-              <option>$</option>
-              <option>$$</option>
-              <option>$$$</option>
+              <option>$0 - $100</option>
+              <option>$100 - $300</option>
+              <option>$300+</option>
             </select>
           </label>
         </div>

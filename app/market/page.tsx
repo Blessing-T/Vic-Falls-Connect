@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import SiteNav from '@/components/SiteNav';
 
 type Maker = {
   name: string;
@@ -16,12 +17,12 @@ type Maker = {
 };
 
 const makers: Maker[] = [
-  { name: 'Chinotimba Woodcarvers', area: 'Chinotimba', category: 'Woodcarving', item: 'Hand-carved soapstone animals', price: '$$', description: 'Sculptures shaped by hand from locally sourced stone, with every maker setting their own price.', maker: 'Maker co-op · Open daily', accent: 'market-card-rust' },
-  { name: 'Mkhosana Batik Studio', area: 'Mkhosana', category: 'Batik', item: 'Hand-dyed wall cloths', price: '$$', description: 'Wax-resist batik in bold local patterns, made in a small family studio you can visit.', maker: 'Family studio · Mon–Sat', accent: 'market-card-teal' },
-  { name: 'Mosi Bead Collective', area: 'Mkhosana', category: 'Beadwork', item: 'Seed-bead jewelry', price: '$', description: 'Colorful necklaces, bracelets, and key rings made by women working together in the neighborhood.', maker: 'Women-led co-op · Daily', accent: 'market-card-gold' },
-  { name: 'Zambezi Village Honey', area: 'Town Centre', category: 'Honey', item: 'Raw forest honey', price: '$', description: 'Unfiltered honey from village beekeepers, bottled close to the source and sold without middlemen.', maker: 'Village co-op · Market days', accent: 'market-card-night' },
-  { name: 'Tonga Basket Makers', area: 'Town Centre', category: 'Weaving', item: 'Ilala palm baskets', price: '$$', description: 'Useful, beautiful baskets woven from ilala palm by makers preserving a living local craft.', maker: 'Maker collective · Fri–Sun', accent: 'market-card-rust' },
-  { name: 'Victoria Falls Print Room', area: 'Chinotimba', category: 'Prints', item: 'Local artist prints', price: '$', description: 'Small-run prints by Zimbabwean artists celebrating the river, wildlife, and everyday town life.', maker: 'Artist-run · Tue–Sat', accent: 'market-card-gold' },
+  { name: 'Chinotimba Woodcarvers', area: 'Chinotimba', category: 'Woodcarving', item: 'Hand-carved soapstone animals', price: '$100 - $300', description: 'Sculptures shaped by hand from locally sourced stone, with every maker setting their own price.', maker: 'Maker co-op · Open daily', accent: 'market-card-rust' },
+  { name: 'Mkhosana Batik Studio', area: 'Mkhosana', category: 'Batik', item: 'Hand-dyed wall cloths', price: '$100 - $300', description: 'Wax-resist batik in bold local patterns, made in a small family studio you can visit.', maker: 'Family studio · Mon–Sat', accent: 'market-card-teal' },
+  { name: 'Mosi Bead Collective', area: 'Mkhosana', category: 'Beadwork', item: 'Seed-bead jewelry', price: '$0 - $100', description: 'Colorful necklaces, bracelets, and key rings made by women working together in the neighborhood.', maker: 'Women-led co-op · Daily', accent: 'market-card-gold' },
+  { name: 'Zambezi Village Honey', area: 'Town Centre', category: 'Honey', item: 'Raw forest honey', price: '$0 - $100', description: 'Unfiltered honey from village beekeepers, bottled close to the source and sold without middlemen.', maker: 'Village co-op · Market days', accent: 'market-card-night' },
+  { name: 'Tonga Basket Makers', area: 'Town Centre', category: 'Weaving', item: 'Ilala palm baskets', price: '$100 - $300', description: 'Useful, beautiful baskets woven from ilala palm by makers preserving a living local craft.', maker: 'Maker collective · Fri–Sun', accent: 'market-card-rust' },
+  { name: 'Victoria Falls Print Room', area: 'Chinotimba', category: 'Prints', item: 'Local artist prints', price: '$0 - $100', description: 'Small-run prints by Zimbabwean artists celebrating the river, wildlife, and everyday town life.', maker: 'Artist-run · Tue–Sat', accent: 'market-card-gold' },
 ];
 
 const categories = ['All', 'Woodcarving', 'Batik', 'Beadwork', 'Honey', 'Weaving', 'Prints'];
@@ -47,11 +48,7 @@ export default function MarketPage() {
 
   return (
     <main className="market-page">
-      <nav className="site-nav kitchens-nav">
-        <Link href="/" className="brandmark">Vic Falls <span>Connect</span></Link>
-        <div className="nav-list"><Link href="/">Home</Link><a href="#listings">Market</a><Link href="/kitchens">Kitchens</Link></div>
-        <Link href="/#village" className="nav-book">Become a maker</Link>
-      </nav>
+      <SiteNav links={[{ label: 'Home', href: '/' }, { label: 'Market', href: '#listings' }, { label: 'Kitchens', href: '/kitchens' }, { label: 'Tables', href: '/tables' }, { label: 'Village', href: '/village' }]} ctaLabel="Become a maker" ctaHref="/host" />
 
       <header className="market-hero wrap">
         <div>
@@ -68,7 +65,7 @@ export default function MarketPage() {
         <div className="filter-panel">
           <label className="search-field"><span className="mono">Search the shelf</span><input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Try honey, batik, Mkhosana..." /></label>
           <label className="filter-select"><span className="mono">Area</span><select value={area} onChange={(event) => setArea(event.target.value)}>{areas.map((option) => <option key={option}>{option}</option>)}</select></label>
-          <label className="filter-select"><span className="mono">Price</span><select value={price} onChange={(event) => setPrice(event.target.value)}><option>Any price</option><option>$</option><option>$$</option></select></label>
+          <label className="filter-select"><span className="mono">Price range</span><select value={price} onChange={(event) => setPrice(event.target.value)}><option>Any price</option><option>$0 - $100</option><option>$100 - $300</option><option>$300+</option></select></label>
         </div>
         <div className="filter-chips" aria-label="Filter by craft category">{categories.map((filter) => <button key={filter} className={category === filter ? 'filter-chip active' : 'filter-chip'} onClick={() => setCategory(filter)} type="button">{filter}</button>)}</div>
         {filteredMakers.length > 0 ? <motion.div className="market-list" layout>{filteredMakers.map((maker, index) => (

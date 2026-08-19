@@ -1,8 +1,8 @@
 'use client';
 
 import { useMemo, useState } from 'react';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
+import SiteNav from '@/components/SiteNav';
 
 type EventItem = { date: string; day: string; title: string; type: string; place: string; description: string; action: string; accent: string };
 
@@ -28,11 +28,7 @@ export default function VillagePage() {
 
   return (
     <main className="village-page">
-      <nav className="site-nav kitchens-nav">
-        <Link href="/" className="brandmark">Vic Falls <span>Connect</span></Link>
-        <div className="nav-list"><Link href="/">Home</Link><a href="#calendar">Calendar</a><a href="#volunteer">Volunteer</a></div>
-        <Link href="/#kitchens" className="nav-book">Explore kitchens</Link>
-      </nav>
+      <SiteNav links={[{ label: 'Home', href: '/' }, { label: 'Calendar', href: '#calendar' }, { label: 'Volunteer', href: '#volunteer' }, { label: 'Market', href: '/market' }]} ctaLabel="Explore kitchens" ctaHref="/kitchens" />
 
       <header className="village-hero wrap">
         <div>
